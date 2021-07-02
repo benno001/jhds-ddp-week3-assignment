@@ -1,0 +1,33 @@
+---
+title: "Rmd presentation - plotly plot"
+author: "Ben de Haan"
+date: "7/2/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(reshape2)
+library(plotly)
+```
+
+## Load interesting data
+
+Let's load the EuStockMarkets data.
+
+```{r, echo = TRUE}
+df <- data.frame(date=as.matrix(time(EuStockMarkets)), EuStockMarkets)
+stocks <- melt(df, "date", variable.name = "market", value.name = "points")
+```
+
+## Plotly
+
+```{r, echo = FALSE}
+
+fig <- plot_ly(stocks, x = ~date, y=~points, color = ~market, type = "scatter", mode = "lines")
+fig
+```
+
+## Thanks for reviewing!
+
+Ben
